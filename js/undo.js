@@ -162,6 +162,7 @@ History.prototype = {
     if (chains.length) {
       this.addUndoLevel(this.updateTo(chains, "linkChain"));
       this.redoHistory = [];
+      this.editor.contentChanged();
       if (this.onChange) this.onChange();
     }
   },
