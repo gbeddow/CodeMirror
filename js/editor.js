@@ -457,6 +457,11 @@ var Editor = (function(){
   }
 
   Editor.prototype = {
+    // Return true if highlighting process is in progress, else false
+    isHighlightInProgress: function() {
+      return this.dirty && (this.dirty.length > 0) ? true : false;
+    },
+
     // Import a piece of code into the editor.
     importCode: function(code) {
       this.history.push(null, null, asEditorLines(code));

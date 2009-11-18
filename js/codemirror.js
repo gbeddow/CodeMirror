@@ -319,6 +319,9 @@ var CodeMirror = (function(){
         var pending = null;
         function update() {
           if (pending) clearTimeout(pending);
+          // don't start linenumbering process if highlighting process is under way because the DOM will be in an indeterminate state
+          // fixes problem observed in Safari / OSX after a large paste where line numbers for first N% of document ok, the rest bad
+          if (self.editor.isHighlightInProgress()) { pending = setTimeout(update, 500); return; }
           start();
         }
         self.updateNumbers = update;
